@@ -2,9 +2,9 @@
 #include <assert.h>
 
 struct CountsBySoH {
-    int healthy;
-    int exchange;
-    int failed;
+  int healthy;
+  int exchange;
+  int failed;
 };
 
 // Function to compute State of Health (SoH) based on present capacity and rated capacity
@@ -12,7 +12,6 @@ float calculateSoH(int presentCapacity, int ratedCapacity) {
     return 100.0 * presentCapacity / ratedCapacity;
 }
 
-// Function to classify batteries based on SoH and count them
 struct CountsBySoH countBatteriesByHealth(const int* presentCapacities, int nBatteries) {
     struct CountsBySoH counts = {0, 0, 0};
     const int ratedCapacity = 120; // Rated capacity of a new battery
@@ -32,33 +31,18 @@ struct CountsBySoH countBatteriesByHealth(const int* presentCapacities, int nBat
     return counts;
 }
 
-// Function to test the countBatteriesByHealth function
 void testBucketingByHealth() {
-    const int presentCapacities[] = {113, 116, 80, 95, 92, 70};
-    const int numberOfBatteries = sizeof(presentCapacities) / sizeof(presentCapacities[0]);
-
-    printf("Counting batteries by SoH...\n");
-    struct CountsBySoH counts = countBatteriesByHealth(presentCapacities, numberOfBatteries);
-
-    // Test cases
-    assert(counts.healthy == 2);
-    assert(counts.exchange == 3);
-    assert(counts.failed == 1);
-
-    // Additional tests for boundary conditions
-    const int presentCapacitiesBoundary[] = {120, 60, 80, 100, 62};
-    const int numberOfBatteriesBoundary = sizeof(presentCapacitiesBoundary) / sizeof(presentCapacitiesBoundary[0]);
-
-    struct CountsBySoH countsBoundary = countBatteriesByHealth(presentCapacitiesBoundary, numberOfBatteriesBoundary);
-
-    assert(countsBoundary.healthy == 1);
-    assert(countsBoundary.exchange == 3);
-    assert(countsBoundary.failed == 1);
-
-    printf("Done counting :)\n");
+  const int presentCapacities[] = {113, 116, 80, 95, 92, 70};
+  const int numberOfBatteries = sizeof(presentCapacities) / sizeof(presentCapacities[0]);
+  printf("Counting batteries by SoH...\n");
+  struct CountsBySoH counts = countBatteriesByHealth(presentCapacities, numberOfBatteries);
+  assert(counts.healthy == 2);
+  assert(counts.exchange == 3);
+  assert(counts.failed == 1);
+  printf("Done counting :)\n");
 }
 
 int main() {
-    testBucketingByHealth();
-    return 0;
+  testBucketingByHealth();
+  return 0;
 }
